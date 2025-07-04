@@ -3,20 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\DocumentResource\Pages;
-use App\Filament\Resources\DocumentResource\RelationManagers;
 use App\Models\Document;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\DB;
 
 class DocumentResource extends Resource
@@ -27,10 +24,16 @@ class DocumentResource extends Resource
 
     protected static ?string $navigationLabel = 'Dokumen Umum';
 
+    protected static ?string $navigationGroup = 'Dokumen';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Select::make('anggota_id')
+                    ->label('Nama Anggota')
+                    ->relationship('anggota', 'name')
+                    ->required(),
                 TextInput::make('title')
                     ->required()
                     ->maxLength(255)
@@ -56,6 +59,10 @@ class DocumentResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('anggota.name')
+                    ->label('Nama Anggota')
+                    ->searchable(),
+
                 TextColumn::make('title')
                     ->label('Judul')
                     ->searchable()
@@ -89,6 +96,10 @@ class DocumentResource extends Resource
                             ->pluck('year', 'year')
                             ->toArray();
                     }),
+
+                SelectFilter::make('anggota_id')
+                    ->label('Nama Anggota')
+                    ->relationship('anggota', 'name')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

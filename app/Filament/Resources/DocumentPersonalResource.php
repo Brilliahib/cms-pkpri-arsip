@@ -24,6 +24,8 @@ class DocumentPersonalResource extends Resource
 
     protected static ?string $navigationLabel = 'Dokumen Pribadi';
 
+    protected static ?string $navigationGroup = 'Dokumen';
+
     public static function form(Form $form): Form
     {
         return $form

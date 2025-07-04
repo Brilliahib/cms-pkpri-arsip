@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class Anggota extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function anggota()
+    public function documents()
     {
-        return $this->belongsTo(Anggota::class);
+        return $this->hasMany(Document::class, 'anggota_id');
     }
 }
