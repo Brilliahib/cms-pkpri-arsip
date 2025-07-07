@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Filament\Resources\DocumentPersonalResource\Pages;
+namespace App\Filament\Resources\IncomingMailResource\Pages;
 
-use App\Filament\Resources\DocumentPersonalResource;
+use App\Filament\Resources\IncomingMailResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 
-class ListDocumentPersonals extends ListRecords
+class ListIncomingMails extends ListRecords
 {
-    protected static string $resource = DocumentPersonalResource::class;
+    protected static string $resource = IncomingMailResource::class;
 
-    protected static ?string $title = 'Dokumen Pribadi';
+    protected static ?string $title = 'Surat Masuk';
 
     protected function getHeaderActions(): array
     {
         return [
             Action::make('createDocument')
-                ->label('Tambah Dokumen')
+                ->label('Tambah Surat')
                 ->icon('heroicon-o-plus')
                 ->color('primary')
                 ->url($this->getResource()::getUrl('create')),

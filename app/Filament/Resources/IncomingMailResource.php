@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DocumentPersonalResource\Pages;
-use App\Filament\Resources\DocumentPersonalResource\RelationManagers;
-use App\Models\DocumentPersonal;
+use App\Filament\Resources\IncomingMailResource\Pages;
+use App\Filament\Resources\IncomingMailResource\RelationManagers;
+use App\Models\IncomingMail;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
@@ -12,19 +12,21 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\DB;
 
-class DocumentPersonalResource extends Resource
+class IncomingMailResource extends Resource
 {
-    protected static ?string $model = DocumentPersonal::class;
+    protected static ?string $model = IncomingMail::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-magnifying-glass';
+    protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
-    protected static ?string $navigationLabel = 'Dokumen Pribadi';
+    protected static ?string $navigationLabel = 'Surat Masuk';
 
-    protected static ?string $navigationGroup = 'Dokumen';
+    protected static ?string $navigationGroup = 'Dokumen Pribadi';
 
     public static function form(Form $form): Form
     {
@@ -47,8 +49,7 @@ class DocumentPersonalResource extends Resource
                     ->label('Bulan'),
                 TextInput::make('year')
                     ->nullable()
-                    ->maxLength(4)
-                    ->label('Tahun'),
+                    ->label('Tahun')
             ]);
     }
 
@@ -70,16 +71,34 @@ class DocumentPersonalResource extends Resource
                     ->label('File')
                     ->icon('heroicon-o-document-text')
                     ->color('primary')
-                    ->url(fn(DocumentPersonal $record): ?string => $record->file_path ? asset('storage/' . $record->file_path) : null)
+                    ->url(fn(IncomingMail $record): ?string => $record->file_path ? asset('storage/' . $record->file_path) : null)
                     ->openUrlInNewTab()
                     ->tooltip('Lihat Dokumen'),
 
+                TextColumn::make('month')
+                    ->label('Bulan')
+                    ->sortable(),
+
                 TextColumn::make('year')
                     ->label('Tahun')
-                    ->sortable()
+                    ->sortable(),
+
+                TextColumn::make('created_at')
+                    ->label('Tanggal Upload')
+                    ->dateTime('d M Y H:i')
+                    ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('year')
+                    ->label('Tahun')
+                    ->options(function () {
+                        return IncomingMail::query()
+                            ->select(DB::raw('DISTINCT year'))
+                            ->whereNotNull('year')
+                            ->orderBy('year', 'desc')
+                            ->pluck('year', 'year')
+                            ->toArray();
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -90,7 +109,7 @@ class DocumentPersonalResource extends Resource
                 ]),
             ])
             ->emptyStateHeading('Belum ada data')
-            ->emptyStateDescription('Silakan buat dokumen pribadi baru untuk memulai.');
+            ->emptyStateDescription('Silakan buat surat masuk terlebih dahulu.');
     }
 
     public static function getRelations(): array
@@ -103,9 +122,9 @@ class DocumentPersonalResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDocumentPersonals::route('/'),
-            'create' => Pages\CreateDocumentPersonal::route('/create'),
-            'edit' => Pages\EditDocumentPersonal::route('/{record}/edit'),
+            'index' => Pages\ListIncomingMails::route('/'),
+            'create' => Pages\CreateIncomingMail::route('/create'),
+            'edit' => Pages\EditIncomingMail::route('/{record}/edit'),
         ];
     }
 }

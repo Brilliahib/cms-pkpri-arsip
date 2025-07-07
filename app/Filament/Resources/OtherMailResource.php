@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DocumentResource\Pages;
-use App\Models\Document;
+use App\Filament\Resources\OtherMailResource\Pages;
+use App\Filament\Resources\OtherMailResource\RelationManagers;
+use App\Models\OtherMail;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,17 +14,19 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\DB;
 
-class DocumentResource extends Resource
+class OtherMailResource extends Resource
 {
-    protected static ?string $model = Document::class;
+    protected static ?string $model = OtherMail::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
 
-    protected static ?string $navigationLabel = 'Dokumen Umum';
+    protected static ?string $navigationLabel = 'Dokumen Lainnya';
 
-    protected static ?string $navigationGroup = 'Dokumen Umum';
+    protected static ?string $navigationGroup = 'Dokumen Pribadi';
 
     public static function form(Form $form): Form
     {
@@ -69,7 +71,7 @@ class DocumentResource extends Resource
                     ->label('File')
                     ->icon('heroicon-o-document-text')
                     ->color('primary')
-                    ->url(fn(Document $record): ?string => $record->file_path ? asset('storage/' . $record->file_path) : null)
+                    ->url(fn(OtherMail $record): ?string => $record->file_path ? asset('storage/' . $record->file_path) : null)
                     ->openUrlInNewTab()
                     ->tooltip('Lihat Dokumen'),
 
@@ -90,7 +92,7 @@ class DocumentResource extends Resource
                 SelectFilter::make('year')
                     ->label('Tahun')
                     ->options(function () {
-                        return Document::query()
+                        return OtherMail::query()
                             ->select(DB::raw('DISTINCT year'))
                             ->whereNotNull('year')
                             ->orderBy('year', 'desc')
@@ -99,10 +101,7 @@ class DocumentResource extends Resource
                     }),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -110,7 +109,7 @@ class DocumentResource extends Resource
                 ]),
             ])
             ->emptyStateHeading('Belum ada data')
-            ->emptyStateDescription('Silakan buat dokumen umum baru untuk memulai.');
+            ->emptyStateDescription('Silakan buat dokumen lainnya terlebih dahulu.');
     }
 
     public static function getRelations(): array
@@ -123,9 +122,9 @@ class DocumentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDocuments::route('/'),
-            'create' => Pages\CreateDocument::route('/create'),
-            'edit' => Pages\EditDocument::route('/{record}/edit'),
+            'index' => Pages\ListOtherMails::route('/'),
+            'create' => Pages\CreateOtherMail::route('/create'),
+            'edit' => Pages\EditOtherMail::route('/{record}/edit'),
         ];
     }
 }
