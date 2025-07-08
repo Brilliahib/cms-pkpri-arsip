@@ -10,13 +10,16 @@ class StatsDashboard extends BaseWidget
     protected function getStats(): array
     {
         $countDocuments = \App\Models\Document::count();
-        $countDocumentPersonals = \App\Models\DocumentPersonal::count();
+        $countIncomingMails = \App\Models\IncomingMail::count();
+        $countOutgoingMails = \App\Models\OutgoingMail::count();
+        $countOtherDocuments = \App\Models\OtherMail::count();
         $countAnggota = \App\Models\Anggota::count();
 
         return [
             Stat::make('Jumlah Dokumen Umum', $countDocuments),
-            Stat::make('Jumlah Dokumen Pribadi', $countDocumentPersonals),
-            Stat::make('Jumlah Anggota Koperasi Primer', $countAnggota)
+            Stat::make('Jumlah Surat Masuk', $countIncomingMails),
+            Stat::make('Jumlah Surat Keluar', $countOutgoingMails),
+            Stat::make('Jumlah Dokumen Lainnya', $countOtherDocuments)
         ];
     }
 }
