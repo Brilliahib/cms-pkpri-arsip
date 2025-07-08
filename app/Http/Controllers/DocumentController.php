@@ -15,7 +15,7 @@ class DocumentController extends Controller
             $query->where('title', 'like', '%' . $request->search . '%');
         }
 
-        $documents = $query->latest()->paginate(10);
+        $documents = $query->latest()->paginate(20);
 
         return view('document', compact('documents'));
     }
