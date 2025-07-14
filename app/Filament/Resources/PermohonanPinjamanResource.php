@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Document;
 use App\Models\IncomingMail;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms;
@@ -68,7 +67,7 @@ class PermohonanPinjamanResource extends Resource
                     ->label('File')
                     ->icon('heroicon-o-document-text')
                     ->color('primary')
-                    ->url(fn(Document $record): ?string => $record->file_path ? asset('storage/' . $record->file_path) : null)
+                    ->url(fn(IncomingMail $record): ?string => $record->file_path ? asset('storage/' . $record->file_path) : null)
                     ->openUrlInNewTab()
                     ->tooltip('Lihat Dokumen'),
 
