@@ -26,7 +26,7 @@ class OutgoingMailResource extends Resource
 
     protected static ?string $navigationLabel = 'Surat Keluar';
 
-    protected static ?string $navigationGroup = 'Dokumen Pribadi';
+    protected static ?string $navigationGroup = 'Surat Keluar';
 
     public static function form(Form $form): Form
     {

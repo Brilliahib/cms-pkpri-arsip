@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('incoming_mails', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('file_path')->nullable();
