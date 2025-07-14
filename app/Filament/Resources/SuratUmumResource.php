@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Models\Document;
+use App\Models\IncomingMail;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -14,18 +15,18 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class DokumenPengurusResource extends Resource
+class SuratUmumResource extends Resource
 {
-    protected static ?string $model = Document::class;
+    protected static ?string $model = IncomingMail::class;
 
-    protected static ?string $navigationLabel = 'Dokumen Pengurus';
-    protected static ?string $navigationGroup = 'Dokumen Umum';
-    protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static ?string $navigationLabel = 'Surat Umum';
+    protected static ?string $navigationGroup = 'Surat Masuk';
+    protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->whereHas('category', fn($query) => $query->where('name', 'Daftar Pengurus'));
+            ->whereHas('category', fn($query) => $query->where('name', 'Surat Umum'));
     }
 
     public static function form(Form $form): Form
@@ -99,19 +100,19 @@ class DokumenPengurusResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Resources\DokumenPengurusResource\Pages\ListDokumenPenguruses::route('/'),
-            'create' => \App\Filament\Resources\DokumenPengurusResource\Pages\CreateDokumenPengurus::route('/create'),
-            'edit' => \App\Filament\Resources\DokumenPengurusResource\Pages\EditDokumenPengurus::route('/{record}/edit'),
+            'index' => \App\Filament\Resources\SuratUmumResource\Pages\ListSuratUmums::route('/'),
+            'create' => \App\Filament\Resources\SuratUmumResource\Pages\CreateSuratUmum::route('/create'),
+            'edit' => \App\Filament\Resources\SuratUmumResource\Pages\EditSuratUmum::route('/{record}/edit'),
         ];
     }
 
     public static function getModelLabel(): string
     {
-        return 'Dokumen Pengurus';
+        return 'Surat Umum';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Dokumen Pengurus';
+        return 'Surat Umum';
     }
 }

@@ -15,4 +15,19 @@ class Category extends Model
     {
         return $this->hasMany(Document::class);
     }
+
+    public function otherMails()
+    {
+        return $this->hasMany(OtherMail::class);
+    }
+
+    public function incomingMails()
+    {
+        return $this->hasMany(IncomingMail::class);
+    }
+
+    public function loanDocuments()
+    {
+        return $this->hasMany(LoanDocument::class);
+    }
 }

@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Models\Document;
+use App\Models\LoanDocument;
+use App\Models\OtherMail;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -14,18 +16,18 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class DokumenPengurusResource extends Resource
+class DokumenUangPeroranganResource extends Resource
 {
-    protected static ?string $model = Document::class;
+    protected static ?string $model = LoanDocument::class;
 
-    protected static ?string $navigationLabel = 'Dokumen Pengurus';
-    protected static ?string $navigationGroup = 'Dokumen Umum';
-    protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static ?string $navigationLabel = 'Dokumen Uang Perorangan';
+    protected static ?string $navigationGroup = 'Dokumen Pinjaman';
+    protected static ?string $navigationIcon = 'heroicon-o-document-currency-dollar';
 
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->whereHas('category', fn($query) => $query->where('name', 'Daftar Pengurus'));
+            ->whereHas('category', fn($query) => $query->where('name', 'Dokumen Uang Perorangan'));
     }
 
     public static function form(Form $form): Form
@@ -99,19 +101,19 @@ class DokumenPengurusResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Resources\DokumenPengurusResource\Pages\ListDokumenPenguruses::route('/'),
-            'create' => \App\Filament\Resources\DokumenPengurusResource\Pages\CreateDokumenPengurus::route('/create'),
-            'edit' => \App\Filament\Resources\DokumenPengurusResource\Pages\EditDokumenPengurus::route('/{record}/edit'),
+            'index' => \App\Filament\Resources\DokumenUangPeroranganResource\Pages\ListDokumenUangPerorangans::route('/'),
+            'create' => \App\Filament\Resources\DokumenUangPeroranganResource\Pages\CreateDokumenUangPerorangan::route('/create'),
+            'edit' => \App\Filament\Resources\DokumenUangPeroranganResource\Pages\EditDokumenUangPerorangan::route('/{record}/edit'),
         ];
     }
 
     public static function getModelLabel(): string
     {
-        return 'Dokumen Pengurus';
+        return 'Dokumen Uang Perorangan';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Dokumen Pengurus';
+        return 'Dokumen Uang Perorangan';
     }
 }
