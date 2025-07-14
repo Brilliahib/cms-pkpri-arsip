@@ -128,4 +128,9 @@ class DocumentResource extends Resource
             'edit' => Pages\EditDocument::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return true;
+    }
 }
