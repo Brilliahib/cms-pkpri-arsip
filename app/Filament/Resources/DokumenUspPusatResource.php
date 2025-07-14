@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Document;
 use App\Models\LoanDocument;
 use App\Models\OtherMail;
 use Illuminate\Database\Eloquent\Builder;
@@ -69,7 +68,7 @@ class DokumenUspPusatResource extends Resource
                     ->label('File')
                     ->icon('heroicon-o-document-text')
                     ->color('primary')
-                    ->url(fn(Document $record): ?string => $record->file_path ? asset('storage/' . $record->file_path) : null)
+                    ->url(fn(LoanDocument $record): ?string => $record->file_path ? asset('storage/' . $record->file_path) : null)
                     ->openUrlInNewTab()
                     ->tooltip('Lihat Dokumen'),
 
