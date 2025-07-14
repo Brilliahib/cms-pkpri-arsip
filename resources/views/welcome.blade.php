@@ -147,7 +147,7 @@
     <section class="hero text-center">
         <div class="container">
             <h1 class="font-paytone">Sistem Kearsipan Data</h1>
-            <p class="mb-4">Digitalisasi arsip PKPRI Surakarta untuk pengelolaan yang lebih mudah, cepat, dan aman.</p>
+            <p class="mb-4">Digitalisasi arsip KK PKPRI Surakarta untuk pengelolaan yang lebih mudah, cepat, dan aman.</p>
             <a href="/admin/login" class="btn btn-light text-success fw-semibold">Mulai Sekarang</a>
         </div>
     </section>
@@ -225,7 +225,7 @@
             <hr class="border-light my-4" />
 
             <div class="text-center small mb-2">
-                © 2025 PKPRI Surakarta.
+                © 2025 KK PKPRI Surakarta.
             </div>
             <p class="text-center small">Dikelola oleh Kelompok 2 TIM KKNT 153 Universitas Diponegoro</p>
         </div>
