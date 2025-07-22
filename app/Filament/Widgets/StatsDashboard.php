@@ -13,7 +13,7 @@ class StatsDashboard extends BaseWidget
         $countIncomingMails = \App\Models\IncomingMail::count();
         $countOutgoingMails = \App\Models\OutgoingMail::count();
         $countOtherDocuments = \App\Models\OtherMail::count();
-        $countAnggota = \App\Models\Anggota::count();
+        $countLoanDocument = \App\Models\LoanDocument::count();
 
         return [
             Stat::make('Jumlah Dokumen Umum', $countDocuments),
