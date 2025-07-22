@@ -9,7 +9,7 @@ use Flowframe\Trend\TrendValue;
 
 class WidgetOtherMail extends ChartWidget
 {
-    protected static ?string $heading = 'Jumlah Dokumen Lainnyas';
+    protected static ?string $heading = 'Jumlah Dokumen Lainnya';
 
     protected function getData(): array
     {
