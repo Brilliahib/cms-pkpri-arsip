@@ -20,7 +20,7 @@ class ListBukuSejarahs extends ListRecords
     {
         return [
             Action::make('createCategory')
-                ->label('Tambah Kategori')
+                ->label('Tambah Buku Sejarah')
                 ->icon('heroicon-o-plus')
                 ->color('primary')
                 ->url($this->getResource()::getUrl('create')),
