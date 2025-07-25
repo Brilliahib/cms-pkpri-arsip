@@ -19,7 +19,7 @@ class DokumenSebratanResource extends Resource
 {
     protected static ?string $model = LoanDocument::class;
 
-    protected static ?string $navigationLabel = 'Dokumen Sebratan';
+    protected static ?string $navigationLabel = 'Dokumen Sebrakan';
     protected static ?string $navigationGroup = 'Dokumen Pinjaman';
     protected static ?string $navigationIcon = 'heroicon-o-document-plus';
 
@@ -108,11 +108,11 @@ class DokumenSebratanResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return 'Dokumen Sebratan';
+        return 'Dokumen Sebrakan';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Dokumen Sebratan';
+        return 'Dokumen Sebrakan';
     }
 }
