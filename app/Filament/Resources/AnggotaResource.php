@@ -32,6 +32,22 @@ class AnggotaResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->label('Nama Anggota'),
+                TextInput::make('instansi')
+                    ->nullable()
+                    ->maxLength(255)
+                    ->label('Instansi'),
+                TextInput::make('alamat')
+                    ->nullable()
+                    ->maxLength(500)
+                    ->label('Alamat'),
+                TextInput::make('nomor_telepon')
+                    ->nullable()
+                    ->maxLength(20)
+                    ->label('Nomor Telepon'),
+                TextInput::make('nama_ketua')
+                    ->nullable()
+                    ->maxLength(255)
+                    ->label('Nama Ketua'),
             ]);
     }
 
@@ -43,6 +59,14 @@ class AnggotaResource extends Resource
                     ->label('Nama Anggota')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('instansi')
+                    ->label('Instansi'),
+                Tables\Columns\TextColumn::make('alamat')
+                    ->label('Alamat'),
+                Tables\Columns\TextColumn::make('nomor_telepon')
+                    ->label('Nomor Telepon'),
+                Tables\Columns\TextColumn::make('nama_ketua')
+                    ->label('Nama Ketua')
             ])
             ->filters([
                 //
