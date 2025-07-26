@@ -81,9 +81,7 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Panduan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/panduan">Panduan</a></li>
                     <li class="nav-item"><a class="nav-link" href="/documents">Cari Dokumen</a></li>
                 </ul>
                 <a href="/admin/login" class="btn btn-success ms-lg-3 mt-2 mt-lg-0">Masuk</a>

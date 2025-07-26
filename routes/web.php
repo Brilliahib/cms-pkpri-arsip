@@ -19,3 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+Route::get('/panduan', function () {
+    return view('panduan');
+})->name('panduan.index');
