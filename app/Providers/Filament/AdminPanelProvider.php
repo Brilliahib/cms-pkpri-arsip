@@ -28,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Green,
+                'primary' => '#4ade80',
             ])
             ->font('Poppins')
             ->brandName('Sistem Kearsipan PKPRI')
