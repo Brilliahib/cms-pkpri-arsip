@@ -36,6 +36,10 @@ class OutgoingMailResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->label('Judul'),
+                TextInput::make('reference_number')
+                    ->nullable()
+                    ->maxLength(100)
+                    ->label('Nomor Surat'),
                 TextInput::make('description')
                     ->nullable()
                     ->maxLength(500)
@@ -62,10 +66,10 @@ class OutgoingMailResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('description')
-                    ->label('Deskripsi')
+                TextColumn::make('reference_number')
+                    ->label('Nomor Surat')
                     ->searchable()
-                    ->limit(50),
+                    ->sortable(),
 
                 Tables\Columns\IconColumn::make('file_path')
                     ->label('File')
