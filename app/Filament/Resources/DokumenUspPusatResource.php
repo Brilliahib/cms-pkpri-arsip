@@ -33,6 +33,10 @@ class DokumenUspPusatResource extends Resource
     {
         return $form->schema([
             TextInput::make('title')->label('Judul')->required(),
+            TextInput::make('reference_number')
+                ->nullable()
+                ->maxLength(100)
+                ->label('Nomor Surat'),
             Select::make('category_id')
                 ->relationship('category', 'name')
                 ->label('Kategori')
@@ -59,10 +63,10 @@ class DokumenUspPusatResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')->label('Judul')->sortable(),
-                TextColumn::make('description')
-                    ->label('Deskripsi')
-                    ->searchable()
-                    ->limit(50),
+                TextColumn::make('reference_number')
+                    ->label('Nomor Surat')
+                    ->sortable()
+                    ->searchable(),
 
                 Tables\Columns\IconColumn::make('file_path')
                     ->label('File')
